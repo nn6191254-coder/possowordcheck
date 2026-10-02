@@ -28,9 +28,9 @@ export function PasswordGenerator({
       </div>
 
       <div className="generator-actions">
-        <button type="button" className="primary-button" onClick={onGenerate}>
+        <button type="button" className="secondary-button generator-action" onClick={onGenerate}>
           <ShieldCheck className="tiny-icon" />
-          Generate Password
+          Generate Secure Password
         </button>
         <button type="button" className="secondary-button" onClick={onCopy}>
           <Copy className="tiny-icon" />

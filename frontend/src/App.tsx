@@ -246,20 +246,22 @@ function App() {
               </div>
 
               <div className="analysis-grid">
-                {cards.map((card) => (
-                  <article key={card.title} className="metric-card">
-                    <div className="metric-topline">
-                      <span className="metric-title">{card.title}</span>
-                      <span className="metric-status">{card.status}</span>
-                    </div>
-                    <div className="metric-value">{card.value}</div>
-                    <p>{card.description}</p>
-                  </article>
-                ))}
+                {password ? cards.map((card) => (
+                    <article key={card.title} className="metric-card">
+                      <div className="metric-topline">
+                        <span className="metric-title">{card.title}</span>
+                        <span className="metric-status">{card.status}</span>
+                      </div>
+                      <div className="metric-value">{card.value}</div>
+                      <p>{card.description}</p>
+                    </article>
+                  )) : (
+                    <p className="analysis-empty">Enter a password above to see its security analysis.</p>
+                  )}
               </div>
             </div>
 
-            <div className="panel">
+            {password && <div className="panel">
               <div className="panel-header">
                 <div className="panel-title">How to Make It Stronger</div>
               </div>
@@ -279,7 +281,7 @@ function App() {
                   </div>
                 )}
               </div>
-            </div>
+            </div>}
           </div>
 
           <aside className="right-stack">
@@ -297,9 +299,13 @@ function App() {
                 hasPassword={password.length > 0}
               />
 
-              <p className="strength-summary">{analysis.description || 'Estimated strength based on password patterns and guessability.'}</p>
+              <p className="strength-summary">
+                {password
+                  ? analysis.description
+                  : 'Enter a password above to see its security strength.'}
+              </p>
 
-              <div className="strength-metric-grid">
+              {password && <div className="strength-metric-grid">
                 <div className="strength-metric-item">
                   <span>PASSWORD LENGTH</span>
                   <strong>{analysis.length} characters</strong>
@@ -312,10 +318,10 @@ function App() {
                   <span>PATTERNS</span>
                   <strong>{analysis.patternChecks.detected ? 'Patterns detected' : 'No obvious patterns'}</strong>
                 </div>
-              </div>
+              </div>}
             </div>
 
-            <PasswordRequirements checks={analysis.requirements} />
+            {password && <PasswordRequirements checks={analysis.requirements} />}
 
             <div className="panel privacy-card">
               <div className="panel-header narrow-header">

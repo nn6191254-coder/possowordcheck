@@ -50,15 +50,15 @@ export function PasswordInput({
           {showPassword ? <EyeOff className="tiny-icon" /> : <Eye className="tiny-icon" />}
         </button>
 
-        <button type="button" className="icon-button" onClick={onClear} aria-label="Clear password">
+        <button type="button" className="icon-button" onClick={onClear} aria-label="Clear password" disabled={!value}>
           <Trash2 className="tiny-icon" />
         </button>
-
-        <button type="submit" className="primary-button" aria-label="Check the current password">
-          <Shield className="tiny-icon" />
-          Check Password
-        </button>
       </div>
+
+      <button type="submit" className="primary-button check-password-button" aria-label="Check the current password">
+        <Shield className="tiny-icon" />
+        CHECK PASSWORD
+      </button>
 
       <p className="privacy-note" style={{ marginTop: 14 }}>
         Your password is analyzed locally in your browser and is never stored or transmitted.
