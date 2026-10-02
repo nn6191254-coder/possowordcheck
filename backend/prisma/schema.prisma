@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  role          String    @default("admin")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastLoginAt   DateTime?
+}
+
+model SecurityTip {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  category    String   @default("general")
+  priority    String   @default("medium")
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  rating    Int
+  message   String
+  category  String   @default("general")
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AppSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model SecurityEvent {
+  id        String   @id @default(cuid())
+  eventType String
+  source    String
+  createdAt DateTime @default(now())
+  metadata  Json?
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  eventType String
+  page      String?
+  createdAt DateTime @default(now())
+  metadata  Json?
+}

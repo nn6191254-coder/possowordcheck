@@ -1,0 +1,14 @@
+{
+  "name": "securecheck",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm --prefix frontend run dev -- --host 0.0.0.0\" \"npm --prefix backend run dev\"",
+    "build": "npm --prefix frontend run build && npm --prefix backend run build",
+    "test": "npm --prefix frontend run test -- --run && npm --prefix backend run test -- --run",
+    "install:all": "npm --prefix frontend install && npm --prefix backend install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
